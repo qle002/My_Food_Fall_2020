@@ -3,6 +3,6 @@ import './pages/login.dart';
 
 void main() {
   runApp(new MaterialApp(
-    home: Login(),
+    home: LoginScreen(),
   ));
 }
