@@ -35,7 +35,7 @@ class LoginState extends State<MyLogin> {
         return AlertDialog(
           backgroundColor: Colors.cyan[50],
           title: Text(
-              'Invalid Input',
+            'Invalid Input',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -51,7 +51,8 @@ class LoginState extends State<MyLogin> {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
-                  ),),
+                  ),
+                ),
               ],
             ),
           ),
@@ -74,6 +75,7 @@ class LoginState extends State<MyLogin> {
       },
     );
   }
+
   void submit(String username, String password) {
     setState(() {
       //Will send the username and password to the back end
@@ -81,28 +83,23 @@ class LoginState extends State<MyLogin> {
       //If username exists, then will give back a bool for the password
       //If both are true, then go to the user's menu
       //If even one is false, the user must re input the Username and/or Password
-      if(userCheck){
-        if(passCheck){
+      if (userCheck) {
+        if (passCheck) {
           Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Menu())
-          );
-        }
-        else if(password == ''){
+              context, MaterialPageRoute(builder: (context) => Menu()));
+        } else if (password == '') {
           invalidInput("No Password Received");
-        }
-        else{
+        } else {
           invalidInput("Invalid Password for this Username");
         }
-      }
-      else if(username == ''){
+      } else if (username == '') {
         invalidInput("No Username Received");
-      }
-      else{
+      } else {
         invalidInput('Username ' + username + ' does not exist');
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -110,142 +107,141 @@ class LoginState extends State<MyLogin> {
       backgroundColor: Colors.cyan[50],
       body: Center(
         child: SingleChildScrollView(
-          child: Column(
-              children: <Widget>[
-                Container(
-                  child: Image.asset(
-                    "assets/images/MyFoodLogo.png",
-                    width: size.width,
-                  ),
-                ),
-                Container(
-                  width: 300.0,
-                  margin: EdgeInsets.only( bottom: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-
-                    children: <Widget>[
-                      TextFormField(
-                        controller: userController,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 16.0, color: Colors.black),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(5),
-                          fillColor: Colors.white,
-                          filled: true,
-                          hintText: 'Username',
-                          hintStyle: TextStyle(fontSize: 16.0, color: Colors.black),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                            // borderRadius: BorderRadius.circular(5.0)
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
+          child: Column(children: <Widget>[
+            Container(
+              child: Image.asset(
+                "assets/images/MyFoodLogo.png",
+                width: size.width,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              width: 300.0,
+              margin: EdgeInsets.only(bottom: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  TextFormField(
+                    controller: userController,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(5),
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintText: 'Username',
+                      hintStyle: TextStyle(fontSize: 16.0, color: Colors.black),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        // borderRadius: BorderRadius.circular(5.0)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
                             BorderSide(width: 2, color: Colors.orange[700]),
-                          ),
-                        ),
                       ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        controller: passwordController,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 16.0, color: Colors.black),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(5),
-                          fillColor: Colors.white,
-                          filled: true,
-                          hintText: 'Password',
-                          hintStyle: TextStyle(fontSize: 16.0, color: Colors.black),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                            // borderRadius: BorderRadius.circular(5.0)
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(width: 2, color: Colors.orange[700]),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Container(
-                        height: 30,
-                        width: 130,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(5),
-                          child: RaisedButton(
-                            onPressed: (){
-                              submit(userController.text, passwordController.text);
-                            },
-                            color: Colors.orange[700],
-                            child: Center(
-                              child: Text(
-                                  'Log In',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Container(
-                        height: 30,
-                        width: 155,
-                        child: FlatButton(
-                          onPressed:(){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ForgotPassword())
-                            );
-                          },
-                          child: Center(
-                            child: Text(
-                              'Forgot Password',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 90,
-                        child: FlatButton(
-                          onPressed:(){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ForgotPassword())
-                            );
-                          },
-                          child: Center(
-                            child: Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ]),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    controller: passwordController,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(5),
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintText: 'Password',
+                      hintStyle: TextStyle(fontSize: 16.0, color: Colors.black),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        // borderRadius: BorderRadius.circular(5.0)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 2, color: Colors.orange[700]),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 45,
+                  ),
+                  Container(
+                    height: 30,
+                    width: 130,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(5),
+                      child: RaisedButton(
+                        onPressed: () {
+                          submit(userController.text, passwordController.text);
+                        },
+                        color: Colors.orange[700],
+                        child: Center(
+                          child: Text('Log In',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Container(
+                    height: 30,
+                    width: 200,
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ForgotPassword()));
+                      },
+                      child: Center(
+                        child: Text(
+                          'Forgot Password',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 30,
+                    width: 200,
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ForgotPassword()));
+                      },
+                      child: Center(
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ]),
         ),
       ),
     ); // This trailing comma makes auto-formatting nicer for build methods.
