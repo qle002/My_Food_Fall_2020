@@ -1,4 +1,4 @@
-import './Login.dart';
+import 'Login.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -15,8 +15,8 @@ class ForgotPasswordState extends State<ForgotPassword> {
         child: RaisedButton(
           child: Text("Return to login"),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyLogin()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LoginScreen()));
           },
         ),
       ),
