@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import './register.dart';
+import 'register.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key key}) :
-  super(key: key);
+  LoginScreen({Key key}) : super(key: key);
 
-  @override  
+  @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -16,11 +15,9 @@ class _LoginScreenState extends State<LoginScreen> {
         child: RaisedButton(
           child: Text("Register"),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RegisterScreen())
-             );
-          } ,
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => RegisterScreen()));
+          },
         ),
       ),
     );
