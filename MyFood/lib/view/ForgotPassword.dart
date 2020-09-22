@@ -15,8 +15,8 @@ class ForgotPasswordState extends State<ForgotPassword> {
         child: RaisedButton(
           child: Text("Return to login"),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyLogin()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LoginScreen()));
           },
         ),
       ),

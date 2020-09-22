@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import './MainPage.dart';
 
 
 class RegisterScreen extends StatefulWidget {
@@ -30,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               margin: EdgeInsets.only(bottom: 20),
               padding: EdgeInsets.only(right: 10.0),
               child: Image(
-                image: AssetImage('assets/logo_MyFood.png'),
+                image: AssetImage("assets/images/MyFoodLogo.png"),
               ),
             ),
             Container(
@@ -137,7 +140,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Material(
                 borderRadius: BorderRadius.circular(5.0),
                 child: RaisedButton(
-                    onPressed: () {
+                    onPressed: () async{
+                      await Firebase.initializeApp();
+                      try{
+                        UserCredential user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailTextController.text , password: passwordTextController.text);
+                        
+                      }
+                      on FirebaseAuthException catch(e){
+                        if(e.code == 'weak-password'){
+                          print('Password too weak');
+                        } else if(e.code == 'email-already-in-use'){
+                          print('The account already exists for that email.');
+                        }
+                      }catch(e){
+                        print(e.toString());
+                      }
                       //Validate code with backend to create user
                       //If validated, create user on backend and navigate to main menu
                     },

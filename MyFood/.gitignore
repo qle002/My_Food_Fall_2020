@@ -9,6 +9,7 @@
 .history
 .svn/
 
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -30,6 +31,7 @@
 .pub-cache/
 .pub/
 /build/
+pubspec.lock
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -39,3 +41,7 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+#key
+google-services.json
+android/app/google-services.json
