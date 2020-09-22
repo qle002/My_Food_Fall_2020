@@ -1,5 +1,4 @@
 import 'dart:ui';
-import './register.dart';
 import './ForgotPassword.dart';
 import './Menu.dart';
 import 'package:flutter/material.dart';
