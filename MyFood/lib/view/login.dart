@@ -1,5 +1,5 @@
 import 'dart:ui';
-// import './Register.dart';
+import './register.dart';
 import './ForgotPassword.dart';
 import './Menu.dart';
 import 'package:flutter/material.dart';
@@ -114,9 +114,6 @@ class LoginState extends State<MyLogin> {
                 width: size.width,
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
             Container(
               width: 300.0,
               margin: EdgeInsets.only(bottom: 20),
@@ -144,7 +141,7 @@ class LoginState extends State<MyLogin> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 25,
                   ),
                   TextFormField(
                     obscureText: true,
@@ -168,7 +165,7 @@ class LoginState extends State<MyLogin> {
                     ),
                   ),
                   SizedBox(
-                    height: 45,
+                    height: 25,
                   ),
                   Container(
                     height: 30,
@@ -192,11 +189,11 @@ class LoginState extends State<MyLogin> {
                     ),
                   ),
                   SizedBox(
-                    height: 60,
+                    height: 50,
                   ),
                   Container(
                     height: 30,
-                    width: 200,
+                    width: 155,
                     child: FlatButton(
                       onPressed: () {
                         Navigator.push(
@@ -218,7 +215,7 @@ class LoginState extends State<MyLogin> {
                   ),
                   Container(
                     height: 30,
-                    width: 200,
+                    width: 90,
                     child: FlatButton(
                       onPressed: () {
                         Navigator.push(
