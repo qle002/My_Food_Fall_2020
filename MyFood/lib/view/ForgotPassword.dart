@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-import 'Login.dart';
-import 'package:flutter/material.dart';
-
-class ForgotPassword extends StatefulWidget {
-  ForgotPassword({Key key}) : super(key: key);
-=======
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'Login.dart';
->>>>>>> f8492442afb1589f50559d4f216aba1daa8ff7da
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -31,14 +23,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         elevation: 0.0,
       ),
       body: Center(
-<<<<<<< HEAD
-        child: RaisedButton(
-          child: Text("Return to login"),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LoginScreen()));
-          },
-=======
         child: Form(
           key: _formKey,
           child: Column(
@@ -148,7 +132,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ))
             ],
           ),
->>>>>>> f8492442afb1589f50559d4f216aba1daa8ff7da
         ),
       ),
     );

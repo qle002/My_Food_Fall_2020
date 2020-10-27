@@ -24,28 +24,19 @@ class _AddRemoveListViewState extends State<AddRemoveListView> {
       body: Column(
         children: <Widget>[
           SizedBox(height: 15.0),
-          Center( 
-            child: Container(
-              child: TextField(
+            TextField(
               controller: _textController,
               decoration: InputDecoration(
               hintText: 'enter text to add',
               ),
             ),
-          ),
-          Container(
-              child: RaisedButton(
+          
+          RaisedButton(
             onPressed: _onSubmit,
             child: Text('Add to List'),
             color: Colors.red,
-          )),
-
-
-
-
-
-
           ),
+        
           SizedBox(height: 20.0),
           Expanded(
             child: ListView(
