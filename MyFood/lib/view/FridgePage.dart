@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './FreezerPage.dart';
 
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
@@ -50,7 +51,8 @@ class _FridgePageState extends State<FridgePage> {
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             //Freezer Box
             InkWell(
-                onTap: () => print("Freezer pressed"),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FreezerPage())),
                 child: Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(

@@ -233,6 +233,7 @@ class LoginState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 20.0),
                   Container(
                     height: 30,
                     width: 90,
