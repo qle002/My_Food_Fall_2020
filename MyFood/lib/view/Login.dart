@@ -170,7 +170,7 @@ class LoginState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 25,
+                    height: 40,
                   ),
                   Container(
                     height: 30,
@@ -184,16 +184,14 @@ class LoginState extends State<LoginScreen> {
                             UserCredential user = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
                                     email: userController.text,
-                                    password: passwordController.text
-                              );
-                              Navigator.of(context).pushNamed(Routes.main_page);
+                                    password: passwordController.text);
+                            Navigator.of(context).pushNamed(Routes.main_page);
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {
                               print('No user found for that email.');
                             } else if (e.code == 'wrong-password') {
                               print('Wrong password provided for that user.');
                             }
-                            
                           }
                         },
                         color: Colors.orange[700],
@@ -209,11 +207,11 @@ class LoginState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 70,
                   ),
                   Container(
-                    height: 30,
-                    width: 155,
+                    height: 40,
+                    width: 160,
                     child: FlatButton(
                       onPressed: () {
                         Navigator.push(
@@ -224,19 +222,20 @@ class LoginState extends State<LoginScreen> {
                       child: Center(
                         child: Text(
                           'Forgot Password',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 30.0),
                   Container(
                     height: 30,
-                    width: 90,
+                    width: 190,
                     child: FlatButton(
                       onPressed: () {
                         Navigator.push(
@@ -247,9 +246,10 @@ class LoginState extends State<LoginScreen> {
                       child: Center(
                         child: Text(
                           'Sign Up',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
