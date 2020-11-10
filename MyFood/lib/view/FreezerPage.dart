@@ -210,6 +210,18 @@ class _FreezerPageState extends State<FreezerPage> {
   //FirebaseFirestore db = FirebaseFirestore.getInstance();
   TextEditingController _textController = TextEditingController();
 
+  Future getPosts() async {
+    var db = FirebaseFirestore.instance;
+
+    QuerySnapshot qn = await db
+        .collection("Users")
+        .doc("Username02")
+        .collection("Drawer")
+        .get();
+
+    return qn.docs;
+  }
+
   List<int> amount = <int>[/*2, 0, 10, 6, 52, 4, 0, 2, 1, 2, 3, 4, 5, 6, 7*/];
   List<String> foodItem = <String>[];
 
@@ -217,18 +229,33 @@ class _FreezerPageState extends State<FreezerPage> {
     setState(() {
       FirebaseFirestore.instance
           .collection("Users")
-          .doc("NXsVacBiJ0JElsx6ByG3")
+          .doc("Username02")
           .collection("Drawer")
           .doc(_textController.text)
           .set({
         "Name": _textController.text,
         "Type": "Freezer",
       });
-      foodItem.add(_textController.text);
-      amount.add(1);
     });
   }
 
+  /* public void getMultipleDocs(){
+    FirebaseFirestore.instance
+          .collection("Users")
+          .doc("Username02")
+          .collection("Drawer").whereEqualTo("Type", "Freezer").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -335,87 +362,45 @@ class _FreezerPageState extends State<FreezerPage> {
                 Row(
                   children: [
                     Container(
-                      child: Padding(
-                          padding: EdgeInsets.only(left: 26.5, top: 49),
-                          child: Container(
-                            child: ListView.builder(
-                                padding: const EdgeInsets.all(8),
-                                itemCount: foodItem.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Dismissible(
-                                      key: Key(foodItem[index]),
-                                      onDismissed: (direction) {
-                                        foodItem.removeAt(index);
-                                        amount.removeAt(index);
-                                      },
-                                      child: Container(
-                                        height: 50,
-                                        margin: EdgeInsets.all(2),
-                                        color: Colors.white,
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                  padding:
-                                                      EdgeInsets.only(left: 10),
-                                                  child: 
-                                                  if fooditem in f
-                                                  Text(
-                                                    '${foodItem[index]}',
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                  )),
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: 10),
-                                                  child: Text(
-                                                    '                                              ${amount[index]}',
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                  )),
-                                              Expanded(
-                                                  child: SizedBox(
-                                                      child: StreamBuilder(
-                                                stream: FirebaseFirestore
-                                                    .instance
-                                                    .collection("Users")
-                                                    .doc("NXsVacBiJ0JElsx6ByG3")
-                                                    .collection("Drawer")
-                                                    .snapshots(),
-                                                builder: (BuildContext context,
-                                                    AsyncSnapshot<QuerySnapshot>
-                                                        snapshot) {
-                                                  if (!snapshot.hasData){
-                                                    return Center(
-                                                      child: CircularProgressIndicator(),);
-                                                  }
-                                                  
-                                                  return ListView(
-                                                    children: snapshot.data.docs
-                                                        .map((document) {
-                                                      return Container(
-                                                          child: Text(document[
-                                                              "Name"]));
-                                                    }).toList(),
-                                                  );
-                                                },
-                                              )))
-                                            ]),
-                                      ));
-                                }),
-                            width: 353,
-                            height: 481,
-                            decoration: BoxDecoration(
-                                //color: Color(0xff3f6576),
-                                color: Colors.blue[200],
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(15),
-                                  topRight: Radius.circular(15),
-                                  bottomRight: Radius.circular(15),
-                                )),
+                        child: Padding(
+                      padding: EdgeInsets.only(left: 26.5, top: 49),
+                      child: Container(
+                          width: 353,
+                          height: 481,
+                          decoration: BoxDecoration(
+                              //color: Color(0xff3f6576),
+                              color: Colors.blue[200],
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              )),
+                          child: FutureBuilder(
+                            future: getPosts(),
+                            builder: (_, snapshot) {
+                              print("testing");
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: Text("Loading..."),
+                                );
+                              } else {
+                                for (var item in snapshot.data) {
+                                  print(item.data);
+                                }
+                                return ListView.builder(
+                                    itemCount: snapshot.data.length,
+                                    itemBuilder: (_, index) {
+                                      print(snapshot.data[0].get("Name"));
+                                      return ListTile(
+                                        title: Text(
+                                            snapshot.data[index].get("Name")),
+                                      );
+                                    });
+                              }
+                            },
                           )),
-                    )
+                    ))
                   ],
                 ),
               ],

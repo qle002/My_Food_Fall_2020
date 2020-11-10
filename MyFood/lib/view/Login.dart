@@ -170,7 +170,7 @@ class LoginState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 25,
                   ),
                   Container(
                     height: 30,
@@ -207,11 +207,11 @@ class LoginState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 70,
+                    height: 50,
                   ),
                   Container(
-                    height: 40,
-                    width: 160,
+                    height: 30,
+                    width: 155,
                     child: FlatButton(
                       onPressed: () {
                         Navigator.push(
@@ -222,20 +222,19 @@ class LoginState extends State<LoginScreen> {
                       child: Center(
                         child: Text(
                           'Forgot Password',
-                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 17,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 20.0),
                   Container(
                     height: 30,
-                    width: 190,
+                    width: 90,
                     child: FlatButton(
                       onPressed: () {
                         Navigator.push(
@@ -246,10 +245,9 @@ class LoginState extends State<LoginScreen> {
                       child: Center(
                         child: Text(
                           'Sign Up',
-                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 17,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

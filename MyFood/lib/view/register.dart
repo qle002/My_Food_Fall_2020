@@ -148,12 +148,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 password: passwordTextController.text.trim());
 
                         User update = FirebaseAuth.instance.currentUser;
-                        update.updateProfile(displayName: emailTextController.text);
+                        update.updateProfile(
+                            displayName: emailTextController.text);
 
                         userCreate(emailTextController.text);
 
                         Navigator.of(context).pushNamed(Routes.auth_login);
-
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
                           print('Password too weak');
