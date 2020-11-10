@@ -31,12 +31,12 @@
 //   ];
 //   List<int> amount = <int>[/*2, 0, 10, 6, 52, 4, 0, 2, 1, 2, 3, 4, 5, 6, 7*/];
 
-//   onSubmit() {
-//     setState(() {
-//       foodItem.add(_textController.text);
-//       amount.add(0);
-//     });
-//   }
+// onSubmit() {
+//   setState(() {
+//     foodItem.add(_textController.text);
+//     amount.add(0);
+//   });
+// }
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -217,13 +217,15 @@ class _FreezerPageState extends State<FreezerPage> {
     setState(() {
       FirebaseFirestore.instance
           .collection("Users")
-          .doc("Username02")
+          .doc("NXsVacBiJ0JElsx6ByG3")
           .collection("Drawer")
           .doc(_textController.text)
           .set({
         "Name": _textController.text,
         "Type": "Freezer",
       });
+      foodItem.add(_textController.text);
+      amount.add(1);
     });
   }
 
@@ -240,6 +242,9 @@ class _FreezerPageState extends State<FreezerPage> {
                     fit: BoxFit.fill)),
             child: Column(
               children: <Widget>[
+                SizedBox(
+                  height: 40,
+                ),
                 //Top of page
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -257,7 +262,7 @@ class _FreezerPageState extends State<FreezerPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
                             margin: EdgeInsets.only(
-                                left: 10, bottom: 24, top: 10, right: 10),
+                                left: 20, bottom: 30, top: 10, right: 10),
                             width: 60,
                             height: 30,
                             child: Center(
@@ -286,6 +291,7 @@ class _FreezerPageState extends State<FreezerPage> {
                         )),
                   ],
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -311,6 +317,7 @@ class _FreezerPageState extends State<FreezerPage> {
                       ),
                     ),
                     //Add Item Button
+
                     InkWell(
                         onTap: () => onSubmit(),
                         child: Container(
@@ -349,18 +356,41 @@ class _FreezerPageState extends State<FreezerPage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
+                                              Container(
+                                                  padding:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: 
+                                                  if fooditem in f
+                                                  Text(
+                                                    '${foodItem[index]}',
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  )),
+                                              Container(
+                                                  padding: EdgeInsets.only(
+                                                      right: 10),
+                                                  child: Text(
+                                                    '                                              ${amount[index]}',
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  )),
                                               Expanded(
                                                   child: SizedBox(
                                                       child: StreamBuilder(
                                                 stream: FirebaseFirestore
                                                     .instance
                                                     .collection("Users")
-                                                    .doc("Username02")
+                                                    .doc("NXsVacBiJ0JElsx6ByG3")
                                                     .collection("Drawer")
                                                     .snapshots(),
                                                 builder: (BuildContext context,
                                                     AsyncSnapshot<QuerySnapshot>
                                                         snapshot) {
+                                                  if (!snapshot.hasData){
+                                                    return Center(
+                                                      child: CircularProgressIndicator(),);
+                                                  }
+                                                  
                                                   return ListView(
                                                     children: snapshot.data.docs
                                                         .map((document) {
