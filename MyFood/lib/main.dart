@@ -17,7 +17,7 @@ class MyFood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(),
+      home: LoginScreen(),
       routes: Routes.define(),
     );
   }
