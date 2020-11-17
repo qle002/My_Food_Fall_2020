@@ -241,7 +241,7 @@ class _FreezerPageState extends State<FreezerPage> {
           .doc(_textController.text)
           .set({
         "Name": _textController.text,
-        "Type": "Type",
+        "Type": "Freezer",
       });
     });
   }
