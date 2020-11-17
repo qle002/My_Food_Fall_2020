@@ -31,6 +31,7 @@ class LoginState extends State<LoginScreen> {
   final passwordController = TextEditingController();
   final bool userCheck = false;
   final bool passCheck = false;
+  var uid;
 
   Future<void> invalidInput(String statement) async {
     return showDialog<void>(
@@ -185,6 +186,7 @@ class LoginState extends State<LoginScreen> {
                                 .signInWithEmailAndPassword(
                                     email: userController.text,
                                     password: passwordController.text);
+                            final uid = user.user.uid;
                             Navigator.of(context).pushNamed(Routes.main_page);
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {

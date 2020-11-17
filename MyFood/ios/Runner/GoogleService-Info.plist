@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>248819051125-7vhso7nbecqr421reorfn44a45oldhpm.apps.googleusercontent.com</string>
+	<string>776563068253-te7cio7anjcar2q792tgjutqtgkba7kl.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.248819051125-7vhso7nbecqr421reorfn44a45oldhpm</string>
+	<string>com.googleusercontent.apps.776563068253-te7cio7anjcar2q792tgjutqtgkba7kl</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCi2NEtGUupvkDEKuFfhGjLahmrdmed6mc</string>
+	<string>AIzaSyCZhg0a4_ns5VMEMPtgYE0QpekN-2E5DeA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>248819051125</string>
+	<string>776563068253</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.MyFood.mikemertens</string>
 	<key>PROJECT_ID</key>
-	<string>myfood-1f72a</string>
+	<string>myfood-70b13</string>
 	<key>STORAGE_BUCKET</key>
-	<string>myfood-1f72a.appspot.com</string>
+	<string>myfood-70b13.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:248819051125:ios:d6370aba3117ae6073e63c</string>
+	<string>1:776563068253:ios:9f5ab0fa5e0d5058f46cb4</string>
 	<key>DATABASE_URL</key>
-	<string>https://myfood-1f72a.firebaseio.com</string>
+	<string>https://myfood-70b13.firebaseio.com</string>
 </dict>
 </plist>

@@ -2,6 +2,7 @@ import 'package:MyFoodLogin/view/FridgePage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FreezerPage extends StatefulWidget {
   FreezerPage({Key key}) : super(key: key);
@@ -11,18 +12,18 @@ class FreezerPage extends StatefulWidget {
 }
 
 class _FreezerPageState extends State<FreezerPage> {
+  //FirebaseFirestore db = FirebaseFirestore.getInstance();
+  FirebaseAuth auth = FirebaseAuth.instance;
   TextEditingController _textController = TextEditingController();
   TextEditingController _AmountController = TextEditingController();
 
   Future getPosts() async {
     var db = FirebaseFirestore.instance;
+    final User user = auth.currentUser;
+    final uid = user.uid;
 
-    QuerySnapshot qn = await db
-        .collection("Users")
-        .doc("Username02")
-        .collection("Drawer")
-        .where("Type", isEqualTo: "Freezer")
-        .get();
+    QuerySnapshot qn =
+        await db.collection("Users").doc(uid).collection("Drawer").get();
 
     return qn.docs;
   }
@@ -31,10 +32,12 @@ class _FreezerPageState extends State<FreezerPage> {
   List<String> foodItem = <String>[];
 
   onSubmit() {
+    final User user = auth.currentUser;
+    final uid = user.uid;
     setState(() {
       FirebaseFirestore.instance
           .collection("Users")
-          .doc("Username02")
+          .doc(uid) // user,user.uid
           .collection("Drawer")
           .doc(_textController.text)
           .set({
