@@ -1,6 +1,7 @@
 import 'package:MyFoodLogin/view/MainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:MyFoodLogin/view/FreezerPage.dart';
+import 'package:MyFoodLogin/view/PerishablePage.dart';
 
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
@@ -190,7 +191,10 @@ class _FridgePageState extends State<FridgePage> {
             children: [
               //Perishables Box
               InkWell(
-                  onTap: () => print("Perishables pressed"),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PerishablePage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(

@@ -217,8 +217,12 @@ class _FreezerPageState extends State<FreezerPage> {
     final User user = auth.currentUser;
     final uid = user.uid;
 
-    QuerySnapshot qn =
-        await db.collection("Users").doc(uid).collection("Drawer").get();
+    QuerySnapshot qn = await db
+        .collection("Users")
+        .doc(uid)
+        .collection("Drawer")
+        .where("Type", isEqualTo: "Freezer")
+        .get();
 
     return qn.docs;
   }
@@ -237,7 +241,7 @@ class _FreezerPageState extends State<FreezerPage> {
           .doc(_textController.text)
           .set({
         "Name": _textController.text,
-        "Type": "Freezer",
+        "Type": "Type",
       });
     });
   }
