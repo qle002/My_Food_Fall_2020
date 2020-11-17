@@ -11,8 +11,8 @@ class FreezerPage extends StatefulWidget {
 }
 
 class _FreezerPageState extends State<FreezerPage> {
-  //FirebaseFirestore db = FirebaseFirestore.getInstance();
   TextEditingController _textController = TextEditingController();
+  TextEditingController _AmountController = TextEditingController();
 
   Future getPosts() async {
     var db = FirebaseFirestore.instance;
@@ -21,6 +21,7 @@ class _FreezerPageState extends State<FreezerPage> {
         .collection("Users")
         .doc("Username02")
         .collection("Drawer")
+        .where("Type", isEqualTo: "Freezer")
         .get();
 
     return qn.docs;
@@ -39,27 +40,22 @@ class _FreezerPageState extends State<FreezerPage> {
           .set({
         "Name": _textController.text,
         "Type": "Freezer",
+        "Amount": 0,
       });
     });
   }
 
-  /* public void getMultipleDocs(){
-    FirebaseFirestore.instance
+  changeAmount(String Item) {
+    setState(() {
+      FirebaseFirestore.instance
           .collection("Users")
           .doc("Username02")
-          .collection("Drawer").whereEqualTo("Type", "Freezer").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-*/
+          .collection("Drawer")
+          .doc(Item)
+          .update({"Amount": _AmountController.text});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,24 +173,75 @@ class _FreezerPageState extends State<FreezerPage> {
                           child: FutureBuilder(
                             future: getPosts(),
                             builder: (_, snapshot) {
-                              print("testing");
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
                                 return Center(
                                   child: Text("Loading..."),
                                 );
                               } else {
-                                for (var item in snapshot.data) {
-                                  print(item.data);
-                                }
                                 return ListView.builder(
                                     itemCount: snapshot.data.length,
                                     itemBuilder: (_, index) {
-                                      print(snapshot.data[0].get("Name"));
-                                      return ListTile(
-                                        title: Text(
-                                            snapshot.data[index].get("Name")),
-                                      );
+                                      return InkWell(
+                                          onTap: () => showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: Text(snapshot
+                                                      .data[index]
+                                                      .get("Name")),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                          child: ListBody(
+                                                              children: <
+                                                                  Widget>[
+                                                        TextField(
+                                                          controller:
+                                                              _AmountController,
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  filled: true,
+                                                                  fillColor: Color(
+                                                                      0xffe0f7f3),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        width:
+                                                                            3.0),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        color: Colors
+                                                                            .blue,
+                                                                        width:
+                                                                            3.0),
+                                                                  ),
+                                                                  hintText:
+                                                                      'Change Amount'),
+                                                        ),
+                                                      ])),
+                                                  actions: <Widget>[
+                                                    InkWell(
+                                                      onTap: () => changeAmount(
+                                                          snapshot.data[index]
+                                                              .get("Name")),
+                                                      child: Container(
+                                                        child: Text("Submit"),
+                                                      ),
+                                                    )
+                                                  ],
+                                                );
+                                              }),
+                                          child: ListTile(
+                                            title: Text(snapshot.data[index]
+                                                .get("Name")),
+                                            trailing: Text(snapshot.data[index]
+                                                .get("Amount")
+                                                .toString()),
+                                          ));
                                     });
                               }
                             },
