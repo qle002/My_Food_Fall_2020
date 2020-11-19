@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:MyFoodLogin/view/FreezerPage.dart';
 import 'package:MyFoodLogin/view/PerishablesPage.dart';
 import 'package:MyFoodLogin/view/DairyPage.dart';
+import 'package:MyFoodLogin/view/ProducePage.dart';
 
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
@@ -121,7 +122,8 @@ class _FridgePageState extends State<FridgePage> {
             children: [
               //Produce Box
               InkWell(
-                  onTap: () => print("Produce pressed"),
+                  onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProducePage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
