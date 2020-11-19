@@ -1,9 +1,11 @@
 import 'package:MyFoodLogin/view/MainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:MyFoodLogin/view/FreezerPage.dart';
+import 'package:MyFoodLogin/view/PantryPage.dart';
 import 'package:MyFoodLogin/view/PerishablesPage.dart';
 import 'package:MyFoodLogin/view/DairyPage.dart';
 import 'package:MyFoodLogin/view/ProducePage.dart';
+
 
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
@@ -17,27 +19,31 @@ class _FridgePageState extends State<FridgePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      constraints: BoxConstraints.expand(),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/fridge_page_background1.png"),
-              fit: BoxFit.fill)),
+      // constraints: BoxConstraints.expand(),
+      // decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //         image: AssetImage("assets/images/fridge_page_background1.png"),
+      //         fit: BoxFit.fill)),
       child: Column(
         children: <Widget>[
           //Top of page
+          SizedBox(
+            height: 40,
+          ),
+
           Row(
             children: [
               //Back button
+
               InkWell(
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage())),
+                  onTap: () => Navigator.pop(),
                   child: Container(
                       decoration: BoxDecoration(
                           color: Colors.black,
                           border: Border.all(width: 3),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       margin: EdgeInsets.only(
-                          left: 10, bottom: 24, top: 10, right: 10),
+                          left: 20, bottom: 50, top: 10, right: 10),
                       width: 60,
                       height: 30,
                       child: Center(
@@ -52,9 +58,11 @@ class _FridgePageState extends State<FridgePage> {
                       )))
             ],
           ),
+
           //First Row
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             //Freezer Box
+
             InkWell(
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => FreezerPage())),
@@ -73,13 +81,13 @@ class _FridgePageState extends State<FridgePage> {
                   width: 164,
                   height: 164,
                   margin:
-                      EdgeInsets.only(left: 23, bottom: 7, top: 0, right: 0),
+                      EdgeInsets.only(left: 30, bottom: 7, top: 0, right: 0),
                   child: Center(
                       child: Text(
                     "Freezer",
                     textAlign: TextAlign.center,
                     style: new TextStyle(
-                        fontSize: 28,
+                        fontSize: 27,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   )),
@@ -109,7 +117,7 @@ class _FridgePageState extends State<FridgePage> {
                     "Meat",
                     textAlign: TextAlign.center,
                     style: new TextStyle(
-                        fontSize: 28,
+                        fontSize: 27,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   )),
@@ -137,7 +145,7 @@ class _FridgePageState extends State<FridgePage> {
                           bottomRight: Radius.circular(10),
                         )),
                     margin:
-                        EdgeInsets.only(left: 23, bottom: 0, top: 36, right: 0),
+                        EdgeInsets.only(left: 30, bottom: 0, top: 36, right: 0),
                     width: 164,
                     height: 164,
                     child: Center(
@@ -145,7 +153,7 @@ class _FridgePageState extends State<FridgePage> {
                       "Produce",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 28,
+                          fontSize: 27,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
@@ -153,7 +161,8 @@ class _FridgePageState extends State<FridgePage> {
 
               //Pantry Box
               InkWell(
-                  onTap: () => print("Pantry pressed"),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PantryPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -175,7 +184,7 @@ class _FridgePageState extends State<FridgePage> {
                       "Pantry",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 28,
+                          fontSize: 27,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
@@ -202,7 +211,7 @@ class _FridgePageState extends State<FridgePage> {
                           bottomRight: Radius.circular(10),
                         )),
                     margin:
-                        EdgeInsets.only(left: 23, bottom: 0, top: 44, right: 0),
+                        EdgeInsets.only(left: 30, bottom: 0, top: 44, right: 0),
                     width: 164,
                     height: 164,
                     child: Center(
@@ -210,7 +219,7 @@ class _FridgePageState extends State<FridgePage> {
                       "AllFood",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 28,
+                          fontSize: 27,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
@@ -241,7 +250,7 @@ class _FridgePageState extends State<FridgePage> {
                       "Dairy",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 28,
+                          fontSize: 27,
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     )),

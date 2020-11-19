@@ -40,7 +40,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 child: Text("Enter the email associated with your account."),
               ),
               Container(
-                width: 300.0,
+                width: 350,
                 height: 40.0,
                 margin: EdgeInsets.only(
                   bottom: 20.0,
