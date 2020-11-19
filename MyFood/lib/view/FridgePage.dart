@@ -2,6 +2,10 @@ import 'package:MyFoodLogin/view/MainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:MyFoodLogin/view/FreezerPage.dart';
 import 'package:MyFoodLogin/view/PantryPage.dart';
+import 'package:MyFoodLogin/view/PerishablesPage.dart';
+import 'package:MyFoodLogin/view/DairyPage.dart';
+import 'package:MyFoodLogin/view/ProducePage.dart';
+
 
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
@@ -32,8 +36,7 @@ class _FridgePageState extends State<FridgePage> {
               //Back button
 
               InkWell(
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage())),
+                  onTap: () => Navigator.pop(),
                   child: Container(
                       decoration: BoxDecoration(
                           color: Colors.black,
@@ -127,7 +130,8 @@ class _FridgePageState extends State<FridgePage> {
             children: [
               //Produce Box
               InkWell(
-                  onTap: () => print("Produce pressed"),
+                  onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProducePage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -190,9 +194,10 @@ class _FridgePageState extends State<FridgePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              //Perishables Box
+              //All Food Box
               InkWell(
-                  onTap: () => print("Pantry pressed"),
+                  onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AllFoodPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -211,7 +216,7 @@ class _FridgePageState extends State<FridgePage> {
                     height: 164,
                     child: Center(
                         child: Text(
-                      "Perishables",
+                      "AllFood",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
                           fontSize: 27,
@@ -222,7 +227,8 @@ class _FridgePageState extends State<FridgePage> {
 
               //Dairy Box
               InkWell(
-                  onTap: () => print("Dairy pressed"),
+                  onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DairyPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
