@@ -36,7 +36,7 @@ class _FridgePageState extends State<FridgePage> {
               //Back button
 
               InkWell(
-                  onTap: () => Navigator.pop(),
+                  onTap: () => Navigator.pop(context),
                   child: Container(
                       decoration: BoxDecoration(
                           color: Colors.black,
