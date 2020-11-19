@@ -1,7 +1,7 @@
 import 'package:MyFoodLogin/view/MainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:MyFoodLogin/view/FreezerPage.dart';
-import 'package:MyFoodLogin/view/PerishablePage.dart';
+import 'package:MyFoodLogin/view/PantryPage.dart';
 
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
@@ -15,11 +15,11 @@ class _FridgePageState extends State<FridgePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      constraints: BoxConstraints.expand(),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/fridge_page_background1.png"),
-              fit: BoxFit.fill)),
+      // constraints: BoxConstraints.expand(),
+      // decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //         image: AssetImage("assets/images/fridge_page_background1.png"),
+      //         fit: BoxFit.fill)),
       child: Column(
         children: <Widget>[
           //Top of page
@@ -157,7 +157,8 @@ class _FridgePageState extends State<FridgePage> {
 
               //Pantry Box
               InkWell(
-                  onTap: () => print("Pantry pressed"),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PantryPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -191,10 +192,7 @@ class _FridgePageState extends State<FridgePage> {
             children: [
               //Perishables Box
               InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PerishablePage())),
+                  onTap: () => print("Pantry pressed"),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
