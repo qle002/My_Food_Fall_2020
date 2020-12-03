@@ -12,9 +12,12 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //This is the mint color for backgrounds
       backgroundColor: Color(0xffe0f7f3),
+
       body: Column(
         children: <Widget>[
+          //User Button
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -25,14 +28,18 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           ),
+
+          //Row of 4 buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //Menu Button
               IconButton(
                 icon: Image.asset('assets/images/menu.png'),
                 iconSize: 80,
                 onPressed: () {},
               ),
+              //Fridge Button
               IconButton(
                 icon: Image.asset('assets/images/fridge.png'),
                 iconSize: 80,
@@ -41,11 +48,13 @@ class _MainPageState extends State<MainPage> {
                       MaterialPageRoute(builder: (context) => FridgePage()));
                 },
               ),
+              //Shopping Cart Button
               IconButton(
                 icon: Image.asset('assets/images/shopping_cart.png'),
                 iconSize: 80,
                 onPressed: () {},
               ),
+              //Grocery List Button
               IconButton(
                 icon: Image.asset('assets/images/grocery_list.png'),
                 iconSize: 80,
@@ -53,6 +62,8 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           ),
+          //Box of text.
+          //This will eventually be a "News Feed" that will tell you information about your fridge
           Expanded(
             child: Container(
               decoration: BoxDecoration(
