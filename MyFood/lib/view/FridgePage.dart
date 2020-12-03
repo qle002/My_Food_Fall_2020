@@ -18,6 +18,7 @@ class _FridgePageState extends State<FridgePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //Container that fills up the whole page to place the background image
         body: Container(
       // constraints: BoxConstraints.expand(),
       // decoration: BoxDecoration(
