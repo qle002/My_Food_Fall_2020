@@ -6,6 +6,7 @@ import 'package:MyFoodLogin/view/PerishablesPage.dart';
 import 'package:MyFoodLogin/view/DairyPage.dart';
 import 'package:MyFoodLogin/view/ProducePage.dart';
 
+import 'MeatPage.dart';
 
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
@@ -96,7 +97,8 @@ class _FridgePageState extends State<FridgePage> {
 
             //Meat Box
             InkWell(
-                onTap: () => print("Meat pressed"),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MeatPage())),
                 child: Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -132,7 +134,7 @@ class _FridgePageState extends State<FridgePage> {
               //Produce Box
               InkWell(
                   onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProducePage())),
+                      MaterialPageRoute(builder: (context) => ProducePage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -198,7 +200,7 @@ class _FridgePageState extends State<FridgePage> {
               //All Food Box
               InkWell(
                   onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllFoodPage())),
+                      MaterialPageRoute(builder: (context) => AllFoodPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -229,7 +231,7 @@ class _FridgePageState extends State<FridgePage> {
               //Dairy Box
               InkWell(
                   onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DairyPage())),
+                      MaterialPageRoute(builder: (context) => DairyPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
