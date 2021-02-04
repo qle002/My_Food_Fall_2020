@@ -5,7 +5,6 @@ import 'package:MyFoodLogin/view/PantryPage.dart';
 import 'package:MyFoodLogin/view/PerishablesPage.dart';
 import 'package:MyFoodLogin/view/DairyPage.dart';
 import 'package:MyFoodLogin/view/ProducePage.dart';
-
 import 'MeatPage.dart';
 
 class FridgePage extends StatefulWidget {
@@ -30,7 +29,7 @@ class _FridgePageState extends State<FridgePage> {
         children: <Widget>[
           //Top of page
           SizedBox(
-            height: 40,
+            height: 0,
           ),
 
           Row(
