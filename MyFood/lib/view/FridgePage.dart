@@ -6,7 +6,6 @@ import 'package:MyFoodLogin/view/PerishablesPage.dart';
 import 'package:MyFoodLogin/view/DairyPage.dart';
 import 'package:MyFoodLogin/view/ProducePage.dart';
 
-
 class FridgePage extends StatefulWidget {
   FridgePage({Key key}) : super(key: key);
 
@@ -20,16 +19,16 @@ class _FridgePageState extends State<FridgePage> {
     return Scaffold(
         //Container that fills up the whole page to place the background image
         body: Container(
-      // constraints: BoxConstraints.expand(),
-      // decoration: BoxDecoration(
-      //     image: DecorationImage(
-      //         image: AssetImage("assets/images/fridge_page_background1.png"),
-      //         fit: BoxFit.fill)),
+      constraints: BoxConstraints.expand(),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/fridge_page_background1.png"),
+              fit: BoxFit.fill)),
       child: Column(
         children: <Widget>[
           //Top of page
           SizedBox(
-            height: 40,
+            height: 0,
           ),
 
           Row(
@@ -132,7 +131,7 @@ class _FridgePageState extends State<FridgePage> {
               //Produce Box
               InkWell(
                   onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProducePage())),
+                      MaterialPageRoute(builder: (context) => ProducePage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -198,7 +197,7 @@ class _FridgePageState extends State<FridgePage> {
               //All Food Box
               InkWell(
                   onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllFoodPage())),
+                      MaterialPageRoute(builder: (context) => AllFoodPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -229,7 +228,7 @@ class _FridgePageState extends State<FridgePage> {
               //Dairy Box
               InkWell(
                   onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DairyPage())),
+                      MaterialPageRoute(builder: (context) => DairyPage())),
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
