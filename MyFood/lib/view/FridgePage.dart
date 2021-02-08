@@ -17,6 +17,9 @@ class FridgePage extends StatefulWidget {
 class _FridgePageState extends State<FridgePage> {
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         //Container that fills up the whole page to place the background image
         body: Container(
@@ -79,10 +82,9 @@ class _FridgePageState extends State<FridgePage> {
                         topRight: Radius.circular(10),
                         bottomRight: Radius.circular(10),
                       )),
-                  width: 164,
-                  height: 164,
-                  margin:
-                      EdgeInsets.only(left: 30, bottom: 7, top: 0, right: 0),
+                  width: deviceWidth * .4,
+                  height: deviceHeight * .24,
+                  margin: EdgeInsets.only(left: deviceWidth * .05),
                   child: Center(
                       child: Text(
                     "Freezer",
