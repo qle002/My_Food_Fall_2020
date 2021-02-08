@@ -89,7 +89,7 @@ class _MeatPageState extends State<MeatPage> {
                         onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MeatPage())),
+                                builder: (context) => FridgePage())),
                         child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.black,

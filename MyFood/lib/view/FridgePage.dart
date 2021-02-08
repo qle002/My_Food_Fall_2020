@@ -21,11 +21,11 @@ class _FridgePageState extends State<FridgePage> {
     return Scaffold(
         //Container that fills up the whole page to place the background image
         body: Container(
-      // constraints: BoxConstraints.expand(),
-      // decoration: BoxDecoration(
-      //     image: DecorationImage(
-      //         image: AssetImage("assets/images/fridge_page_background1.png"),
-      //         fit: BoxFit.fill)),
+      constraints: BoxConstraints.expand(),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/fridge_page_background1.png"),
+              fit: BoxFit.fill)),
       child: Column(
         children: <Widget>[
           //Top of page
