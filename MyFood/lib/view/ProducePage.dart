@@ -50,7 +50,7 @@ class _ProducePageState extends State<ProducePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         body: Container(
             constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(

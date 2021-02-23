@@ -50,7 +50,7 @@ class _DairyPageState extends State<DairyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         body: Container(
             constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(
