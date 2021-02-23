@@ -31,8 +31,8 @@ class _MeatPageState extends State<MeatPage> {
     return qn.docs;
   }
 
-  List<int> amount = <int>[/*2, 0, 10, 6, 52, 4, 0, 2, 1, 2, 3, 4, 5, 6, 7*/];
-  List<String> foodItem = <String>[];
+  //List<int> amount = <int>[/*2, 0, 10, 6, 52, 4, 0, 2, 1, 2, 3, 4, 5, 6, 7*/];
+  // List<String> foodItem = <String>[];
 
   onSubmit() {
     final User user = auth.currentUser;
