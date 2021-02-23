@@ -40,7 +40,7 @@ class _FreezerPageState extends State<FreezerPage> {
 
 //Function that is called when a new item is submitted.
 //Submits the new food item from the text controller to the current user and setting its type to freezer
-  onSubmit() {
+  onSubmit(String name, String amount) {
     final User user = auth.currentUser;
     final uid = user.uid;
     setState(() {
@@ -48,11 +48,11 @@ class _FreezerPageState extends State<FreezerPage> {
           .collection("Users")
           .doc(uid) // user,user.uid
           .collection("Drawer")
-          .doc(_textController.text)
+          .doc(name)
           .set({
-        "Name": _textController.text,
+        "Name": name,
         "Type": "Freezer",
-        "Amount": _amountController,
+        "Amount": amount,
       });
     });
   }
@@ -90,6 +90,8 @@ class _FreezerPageState extends State<FreezerPage> {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Container(
@@ -119,15 +121,16 @@ class _FreezerPageState extends State<FreezerPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
                             margin: EdgeInsets.only(
-                                left: 10, bottom: 24, top: 10, right: 10),
-                            width: 60,
-                            height: 30,
+                                left: deviceWidth * .05,
+                                top: deviceHeight * .02),
+                            width: deviceWidth * .15,
+                            height: deviceHeight * .045,
                             child: Center(
                               child: Text(
                                 "Back",
                                 textAlign: TextAlign.center,
                                 style: new TextStyle(
-                                    fontSize: 12,
+                                    fontSize: deviceWidth * .03,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
@@ -136,13 +139,13 @@ class _FreezerPageState extends State<FreezerPage> {
                 ),
                 //Row with textbox and Add button
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //Textbox to add food
                     Container(
-                      width: 275,
-                      height: 50,
-                      margin: EdgeInsets.only(left: 20, right: 20),
+                      width: deviceWidth * .6,
+                      height: deviceHeight * .2,
+                      margin: EdgeInsets.only(top: deviceHeight * .04),
                       child: TextField(
                         controller: _textController,
                         decoration: InputDecoration(
@@ -162,6 +165,7 @@ class _FreezerPageState extends State<FreezerPage> {
                     //Add Item Button
                     InkWell(
                         onTap: () {
+                          //Amount Alert
                           showDialog(
                               context: context,
                               builder: (context) {
@@ -171,6 +175,7 @@ class _FreezerPageState extends State<FreezerPage> {
                                       child: ListBody(children: <Widget>[
                                     TextField(
                                       controller: _amountController,
+                                      keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffe0f7f3),
@@ -185,13 +190,14 @@ class _FreezerPageState extends State<FreezerPage> {
                                           ),
                                           hintText: 'Set Amount'),
                                     ),
+                                    // Drop down UOM goes here
                                   ])),
                                   actions: <Widget>[
                                     //Submit Button
                                     InkWell(
                                       onTap: () {
-                                        onSubmit();
-                                        changeAmount(_textController.text);
+                                        onSubmit(_textController.text,
+                                            _amountController.text);
                                         Navigator.of(context).pop();
                                         _textController.clear();
                                       },
@@ -243,8 +249,11 @@ class _FreezerPageState extends State<FreezerPage> {
                                   image: AssetImage(
                                       "assets/images/add_button.png"),
                                   fit: BoxFit.fill)),
-                          width: 40,
-                          height: 40,
+                          width: deviceWidth * .095,
+                          height: deviceHeight * .06,
+                          margin: EdgeInsets.only(
+                              bottom: deviceHeight * .08,
+                              left: deviceWidth * .05),
                         )),
                   ],
                 ),
@@ -253,166 +262,177 @@ class _FreezerPageState extends State<FreezerPage> {
                 Row(
                   children: [
                     Container(
+                        width: deviceWidth * .922,
+                        height: deviceHeight * .638,
+                        margin: EdgeInsets.only(bottom: deviceHeight * 0),
                         child: Padding(
-                      padding: EdgeInsets.only(left: 26.5, top: 49),
-                      child: Container(
-                          width: 353,
-                          height: 481,
-                          decoration: BoxDecoration(
-                              //color: Color(0xff3f6576),
-                              color: Colors.blue[200],
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              )),
-                          //This is where the items are loaded in from the DB
-                          child: FutureBuilder(
-                            future: getPosts(),
-                            builder: (_, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Center(
-                                  child: Text("Loading..."),
-                                );
-                              } else {
-                                return ListView.builder(
-                                    itemCount: snapshot.data.length,
-                                    itemBuilder: (_, index) {
-                                      //When an item is clicked, a dialog box to change the amount of that item or to delete the item appears
-                                      return InkWell(
-                                          onTap: () => showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text(snapshot
-                                                      .data[index]
-                                                      .get("Name")),
-                                                  content:
-                                                      SingleChildScrollView(
-                                                          child: ListBody(
-                                                              children: <
-                                                                  Widget>[
-                                                        TextField(
-                                                          controller:
-                                                              _amountController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                                  filled: true,
-                                                                  fillColor: Color(
-                                                                      0xffe0f7f3),
-                                                                  enabledBorder:
-                                                                      OutlineInputBorder(
-                                                                    borderSide: BorderSide(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        width:
-                                                                            3.0),
-                                                                  ),
-                                                                  focusedBorder:
-                                                                      OutlineInputBorder(
-                                                                    borderSide: BorderSide(
-                                                                        color: Colors
-                                                                            .blue,
-                                                                        width:
-                                                                            3.0),
-                                                                  ),
-                                                                  hintText:
-                                                                      'Change Amount'),
+                          padding: EdgeInsets.only(bottom: deviceHeight * 0),
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  bottom: deviceHeight * .0,
+                                  left: deviceWidth * 0.062),
+                              width: deviceWidth * .86,
+                              height: deviceHeight * .6,
+                              decoration: BoxDecoration(
+                                  //color: Color(0xff3f6576),
+                                  color: Colors.blue[200],
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15),
+                                    bottomRight: Radius.circular(15),
+                                  )),
+                              //This is where the items are loaded in from the DB
+                              child: FutureBuilder(
+                                future: getPosts(),
+                                builder: (_, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Center(
+                                      child: Text("Loading..."),
+                                    );
+                                  } else {
+                                    return ListView.builder(
+                                        itemCount: snapshot.data.length,
+                                        itemBuilder: (_, index) {
+                                          //When an item is clicked, a dialog box to change the amount of that item or to delete the item appears
+                                          return InkWell(
+                                              onTap: () => showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      title: Text(snapshot
+                                                          .data[index]
+                                                          .get("Name")),
+                                                      content:
+                                                          SingleChildScrollView(
+                                                              child: ListBody(
+                                                                  children: <
+                                                                      Widget>[
+                                                            TextField(
+                                                              controller:
+                                                                  _amountController,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                      filled:
+                                                                          true,
+                                                                      fillColor:
+                                                                          Color(
+                                                                              0xffe0f7f3),
+                                                                      enabledBorder:
+                                                                          OutlineInputBorder(
+                                                                        borderSide: BorderSide(
+                                                                            color:
+                                                                                Colors.black,
+                                                                            width: 3.0),
+                                                                      ),
+                                                                      focusedBorder:
+                                                                          OutlineInputBorder(
+                                                                        borderSide: BorderSide(
+                                                                            color:
+                                                                                Colors.blue,
+                                                                            width: 3.0),
+                                                                      ),
+                                                                      hintText:
+                                                                          'Change Amount'),
+                                                            ),
+                                                          ])),
+                                                      actions: <Widget>[
+                                                        //Submit Button
+                                                        InkWell(
+                                                          onTap: () {
+                                                            changeAmount(snapshot
+                                                                .data[index]
+                                                                .get("Name"));
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          child: Container(
+                                                              height: 40,
+                                                              width: 60,
+                                                              decoration: BoxDecoration(
+                                                                  color: Colors
+                                                                          .green[
+                                                                      300],
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              10))),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  "Submit",
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              )),
                                                         ),
-                                                      ])),
-                                                  actions: <Widget>[
-                                                    //Submit Button
-                                                    InkWell(
-                                                      onTap: () {
-                                                        changeAmount(snapshot
-                                                            .data[index]
-                                                            .get("Name"));
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Container(
-                                                          height: 40,
-                                                          width: 60,
-                                                          decoration: BoxDecoration(
-                                                              color: Colors
-                                                                  .green[300],
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10))),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Submit",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                        //Cancel Button
+                                                        InkWell(
+                                                          onTap: () {
+                                                            deleteItem(snapshot
+                                                                .data[index]
+                                                                .get("Name"));
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          //Delete Button
+                                                          child: Container(
+                                                              height: 40,
+                                                              width: 60,
+                                                              decoration: BoxDecoration(
                                                                   color: Colors
-                                                                      .white),
-                                                            ),
-                                                          )),
-                                                    ),
-                                                    //Cancel Button
-                                                    InkWell(
-                                                      onTap: () {
-                                                        deleteItem(snapshot
-                                                            .data[index]
-                                                            .get("Name"));
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      //Delete Button
-                                                      child: Container(
-                                                          height: 40,
-                                                          width: 60,
-                                                          decoration: BoxDecoration(
-                                                              color: Colors
-                                                                  .red[300],
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10))),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Delete",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          )),
-                                                    )
-                                                  ],
-                                                );
-                                              }),
-                                          //Individual Items
-                                          child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 0.0,
-                                                  horizontal: 10.0),
-                                              child: Card(
-                                                  color: Colors.white,
-                                                  child: ListTile(
-                                                    title: Text(
-                                                      snapshot.data[index]
-                                                          .get("Name"),
-                                                      textAlign: TextAlign.left,
-                                                    ),
-                                                    trailing: Text(
-                                                      snapshot.data[index]
-                                                          .get("Amount")
-                                                          .toString(),
-                                                      textAlign: TextAlign.left,
-                                                    ),
-                                                  ))));
-                                    });
-                              }
-                            },
-                          )),
-                    ))
+                                                                      .red[300],
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              10))),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  "Delete",
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              )),
+                                                        )
+                                                      ],
+                                                    );
+                                                  }),
+                                              //Individual Items
+                                              child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 0.0,
+                                                      horizontal: 10.0),
+                                                  child: Card(
+                                                      color: Colors.white,
+                                                      child: ListTile(
+                                                        title: Text(
+                                                          snapshot.data[index]
+                                                              .get("Name"),
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                        ),
+                                                        trailing: Text(
+                                                          snapshot.data[index]
+                                                              .get("Amount")
+                                                              .toString(),
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                        ),
+                                                      ))));
+                                        });
+                                  }
+                                },
+                              )),
+                        ))
                   ],
                 ),
               ],
