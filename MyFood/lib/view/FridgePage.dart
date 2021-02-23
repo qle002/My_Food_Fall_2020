@@ -31,31 +31,28 @@ class _FridgePageState extends State<FridgePage> {
       child: Column(
         children: <Widget>[
           //Top of page
-          SizedBox(
-            height: 0,
-          ),
-
           Row(
             children: [
               //Back button here
 
               InkWell(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MainPage())),
                   child: Container(
                       decoration: BoxDecoration(
                           color: Colors.black,
                           border: Border.all(width: 3),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       margin: EdgeInsets.only(
-                          left: 20, bottom: 50, top: 10, right: 10),
-                      width: 60,
-                      height: 30,
+                          left: deviceWidth * .05, top: deviceHeight * .02),
+                      width: deviceWidth * .15,
+                      height: deviceHeight * .045,
                       child: Center(
                         child: Text(
                           "Back",
                           textAlign: TextAlign.center,
                           style: new TextStyle(
-                              fontSize: 12,
+                              fontSize: deviceWidth * .03,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
@@ -65,8 +62,8 @@ class _FridgePageState extends State<FridgePage> {
 
           //First Row
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            //
             //Freezer Box
-
             InkWell(
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => FreezerPage())),
@@ -83,14 +80,15 @@ class _FridgePageState extends State<FridgePage> {
                         bottomRight: Radius.circular(10),
                       )),
                   width: deviceWidth * .4,
-                  height: deviceHeight * .24,
-                  margin: EdgeInsets.only(left: deviceWidth * .05),
+                  height: deviceHeight * .241,
+                  margin: EdgeInsets.only(
+                      left: deviceWidth * .053, top: deviceHeight * .028),
                   child: Center(
                       child: Text(
                     "Freezer",
                     textAlign: TextAlign.center,
                     style: new TextStyle(
-                        fontSize: 27,
+                        fontSize: deviceWidth * .08,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   )),
@@ -112,16 +110,16 @@ class _FridgePageState extends State<FridgePage> {
                         topRight: Radius.circular(10),
                         bottomRight: Radius.circular(10),
                       )),
-                  width: 164,
-                  height: 164,
-                  margin:
-                      EdgeInsets.only(left: 25, bottom: 7, top: 0, right: 0),
+                  width: deviceWidth * .4,
+                  height: deviceHeight * .241,
+                  margin: EdgeInsets.only(
+                      left: deviceWidth * .061, top: deviceHeight * .0262),
                   child: Center(
                       child: Text(
                     "Meat",
                     textAlign: TextAlign.center,
                     style: new TextStyle(
-                        fontSize: 27,
+                        fontSize: deviceWidth * .08,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   )),
@@ -148,16 +146,16 @@ class _FridgePageState extends State<FridgePage> {
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10),
                         )),
-                    margin:
-                        EdgeInsets.only(left: 30, bottom: 0, top: 36, right: 0),
-                    width: 164,
-                    height: 164,
+                    margin: EdgeInsets.only(
+                        left: deviceWidth * .054, top: deviceHeight * .06),
+                    width: deviceWidth * .4,
+                    height: deviceHeight * .241,
                     child: Center(
                         child: Text(
                       "Produce",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 27,
+                          fontSize: deviceWidth * .08,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
@@ -179,16 +177,16 @@ class _FridgePageState extends State<FridgePage> {
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10),
                         )),
-                    margin:
-                        EdgeInsets.only(left: 25, bottom: 0, top: 36, right: 0),
-                    width: 164,
-                    height: 164,
+                    margin: EdgeInsets.only(
+                        left: deviceWidth * .06, top: deviceHeight * .061),
+                    width: deviceWidth * .4,
+                    height: deviceHeight * .241,
                     child: Center(
                         child: Text(
                       "Pantry",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 27,
+                          fontSize: deviceWidth * .08,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
@@ -214,16 +212,16 @@ class _FridgePageState extends State<FridgePage> {
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10),
                         )),
-                    margin:
-                        EdgeInsets.only(left: 30, bottom: 0, top: 44, right: 0),
-                    width: 164,
-                    height: 164,
+                    margin: EdgeInsets.only(
+                        left: deviceWidth * .053, top: deviceHeight * .062),
+                    width: deviceWidth * .4,
+                    height: deviceHeight * .241,
                     child: Center(
                         child: Text(
                       "AllFood",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 27,
+                          fontSize: deviceWidth * .08,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
@@ -245,16 +243,16 @@ class _FridgePageState extends State<FridgePage> {
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10),
                         )),
-                    margin:
-                        EdgeInsets.only(left: 25, bottom: 0, top: 44, right: 0),
-                    width: 164,
-                    height: 164,
+                    margin: EdgeInsets.only(
+                        left: deviceWidth * .062, top: deviceHeight * .064),
+                    width: deviceWidth * .4,
+                    height: deviceHeight * .241,
                     child: Center(
                         child: Text(
                       "Dairy",
                       textAlign: TextAlign.center,
                       style: new TextStyle(
-                          fontSize: 27,
+                          fontSize: deviceWidth * .08,
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     )),
