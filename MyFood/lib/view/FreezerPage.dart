@@ -1,7 +1,7 @@
 import 'package:MyFoodLogin/view/FridgePage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FreezerPage extends StatefulWidget {
@@ -12,6 +12,8 @@ class FreezerPage extends StatefulWidget {
 }
 
 class _FreezerPageState extends State<FreezerPage> {
+  DateTime _dateTime;
+
   //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
   //Initialize the database, text controller for food item, and amount controller for food item
@@ -40,9 +42,10 @@ class _FreezerPageState extends State<FreezerPage> {
 
 //Function that is called when a new item is submitted.
 //Submits the new food item from the text controller to the current user and setting its type to freezer
-  onSubmit(String name, String amount) {
+  onSubmit(String name, String amount, String expdate) {
     final User user = auth.currentUser;
     final uid = user.uid;
+    // print(date);
     setState(() {
       FirebaseFirestore.instance
           .collection("Users")
@@ -53,6 +56,7 @@ class _FreezerPageState extends State<FreezerPage> {
         "Name": name,
         "Type": "Freezer",
         "Amount": amount,
+        "ExpDate": expdate
       });
     });
   }
@@ -93,7 +97,7 @@ class _FreezerPageState extends State<FreezerPage> {
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         body: Container(
             constraints: BoxConstraints.expand(),
             //Set background image
@@ -192,12 +196,38 @@ class _FreezerPageState extends State<FreezerPage> {
                                     ),
                                     // Drop down UOM goes here
                                   ])),
+                                  
                                   actions: <Widget>[
+                                    //Expiration date picker
+                                    ElevatedButton(
+                                      child: Text('Expiration Date'),
+                                      onPressed: () {
+                                        showDatePicker(
+                                                context: context,
+                                                initialDate: DateTime.now(),
+                                                firstDate: DateTime(2021),
+                                                lastDate: DateTime(2100))
+                                            .then((expdate) {
+                                          setState(() {
+                                            _dateTime = expdate;
+                                          });
+                                        });
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red, // background
+                                        onPrimary: Colors.white, // foreground
+                                      ),
+                                    ),
+
                                     //Submit Button
                                     InkWell(
                                       onTap: () {
-                                        onSubmit(_textController.text,
-                                            _amountController.text);
+                                        onSubmit(
+                                            _textController.text,
+                                            _amountController.text,
+                                            _dateTime
+                                                .toString()
+                                                .substring(0, 10));
                                         Navigator.of(context).pop();
                                         _textController.clear();
                                       },
@@ -337,27 +367,22 @@ class _FreezerPageState extends State<FreezerPage> {
                                                             ),
                                                           ])),
                                                       actions: <Widget>[
+                                                        
+                                                        Text(snapshot.data[index].get("ExpDate") == null ? 'No expiration date' : snapshot.data[index].get("ExpDate")),
+
                                                         //Submit Button
                                                         InkWell(
                                                           onTap: () {
-                                                            changeAmount(snapshot
-                                                                .data[index]
-                                                                .get("Name"));
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
+                                                            changeAmount(snapshot.data[index].get("Name"));
+                                                            Navigator.of(context).pop();
                                                           },
                                                           child: Container(
                                                               height: 40,
                                                               width: 60,
                                                               decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                          .green[
-                                                                      300],
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              10))),
+                                                                color: Colors.green[300],
+                                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                              ),
                                                               child: Center(
                                                                 child: Text(
                                                                   "Submit",
@@ -370,6 +395,7 @@ class _FreezerPageState extends State<FreezerPage> {
                                                                 ),
                                                               )),
                                                         ),
+
                                                         //Cancel Button
                                                         InkWell(
                                                           onTap: () {
