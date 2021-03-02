@@ -191,6 +191,20 @@ class _FreezerPageState extends State<FreezerPage> {
                                           hintText: 'Set Amount'),
                                     ),
                                     // Drop down UOM goes here
+                                    new DropdownButton<String>(
+                                      items: <String>[
+                                        'Boxes',
+                                        'Bags',
+                                        'Pounds',
+                                        'Ounces'
+                                      ].map((String value) {
+                                        return new DropdownMenuItem<String>(
+                                          value: value,
+                                          child: new Text(value),
+                                        );
+                                      }).toList(),
+                                      onChanged: (_) {},
+                                    )
                                   ])),
                                   actions: <Widget>[
                                     //Submit Button
