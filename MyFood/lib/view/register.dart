@@ -138,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               width: 130,
               child: Material(
                 borderRadius: BorderRadius.circular(5.0),
-                child: ElevatedButton(
+                child: RaisedButton(
                     onPressed: () async {
                       await Firebase.initializeApp();
                       try {
@@ -166,10 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       //Validate code with backend to create user
                       //If validated, create user on backend and navigate to main menu
                     },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.orange[700], // background
-                      onPrimary: Colors.white, // foreground
-                    ),
+                    color: Colors.orange[700],
                     child: Center(
                       child: Text(
                         "Sign Up",
@@ -187,14 +184,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               width: 130,
               child: Material(
                 borderRadius: BorderRadius.circular(5.0),
-                child: ElevatedButton(
+                child: RaisedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.orange[700], // background
-                      onPrimary: Colors.white, // foreground
-                    ),
+                    color: Colors.orange[700],
                     child: Center(
                       child: Text(
                         "Cancel",

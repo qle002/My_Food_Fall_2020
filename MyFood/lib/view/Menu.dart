@@ -12,7 +12,7 @@ class MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
+        child: RaisedButton(
           child: Text("Return to login"),
           onPressed: () {
             Navigator.push(context,
