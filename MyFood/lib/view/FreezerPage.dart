@@ -1,7 +1,7 @@
 import 'package:MyFoodLogin/view/FridgePage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FreezerPage extends StatefulWidget {
@@ -12,6 +12,8 @@ class FreezerPage extends StatefulWidget {
 }
 
 class _FreezerPageState extends State<FreezerPage> {
+  DateTime _dateTime;
+
   //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
   //Initialize the database, text controller for food item, and amount controller for food item
@@ -35,14 +37,12 @@ class _FreezerPageState extends State<FreezerPage> {
     return qn.docs;
   }
 
-  //List<int> amount = <int>[/*2, 0, 10, 6, 52, 4, 0, 2, 1, 2, 3, 4, 5, 6, 7*/];
-  //List<String> foodItem = <String>[];
-
 //Function that is called when a new item is submitted.
 //Submits the new food item from the text controller to the current user and setting its type to freezer
-  onSubmit(String name, String amount) {
+  onSubmit(String name, String amount, String expdate) {
     final User user = auth.currentUser;
     final uid = user.uid;
+    // print(date);
     setState(() {
       FirebaseFirestore.instance
           .collection("Users")
@@ -53,6 +53,7 @@ class _FreezerPageState extends State<FreezerPage> {
         "Name": name,
         "Type": "Freezer",
         "Amount": amount,
+        "ExpDate": expdate
       });
     });
   }
@@ -106,7 +107,7 @@ class _FreezerPageState extends State<FreezerPage> {
               children: <Widget>[
                 //Top of page
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //Back button
                     InkWell(
@@ -144,8 +145,8 @@ class _FreezerPageState extends State<FreezerPage> {
                     //Textbox to add food
                     Container(
                       width: deviceWidth * .6,
-                      height: deviceHeight * .2,
-                      margin: EdgeInsets.only(top: deviceHeight * .015),
+                      height: deviceHeight * .15,
+                      margin: EdgeInsets.only(top: deviceHeight * .02),
                       child: TextField(
                         controller: _textController,
                         decoration: InputDecoration(
@@ -207,11 +208,36 @@ class _FreezerPageState extends State<FreezerPage> {
                                     )
                                   ])),
                                   actions: <Widget>[
+                                    //Expiration date picker
+                                    ElevatedButton(
+                                      child: Text('Expiration Date'),
+                                      onPressed: () {
+                                        showDatePicker(
+                                                context: context,
+                                                initialDate: DateTime.now(),
+                                                firstDate: DateTime(2021),
+                                                lastDate: DateTime(2100))
+                                            .then((expdate) {
+                                          setState(() {
+                                            _dateTime = expdate;
+                                          });
+                                        });
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red, // background
+                                        onPrimary: Colors.white, // foreground
+                                      ),
+                                    ),
+
                                     //Submit Button
                                     InkWell(
                                       onTap: () {
-                                        onSubmit(_textController.text,
-                                            _amountController.text);
+                                        onSubmit(
+                                            _textController.text,
+                                            _amountController.text,
+                                            _dateTime
+                                                .toString()
+                                                .substring(0, 10));
                                         Navigator.of(context).pop();
                                         _textController.clear();
                                       },
@@ -264,11 +290,11 @@ class _FreezerPageState extends State<FreezerPage> {
                                   image: AssetImage(
                                       "assets/images/add_button.png"),
                                   fit: BoxFit.fill)),
-                          width: deviceWidth * .11,
+                          width: deviceWidth * .095,
                           height: deviceHeight * .06,
                           margin: EdgeInsets.only(
-                              bottom: deviceHeight * 0.105,
-                              left: deviceWidth * .02),
+                              bottom: deviceHeight * .05,
+                              left: deviceWidth * .01),
                         )),
                   ],
                 ),
@@ -277,14 +303,12 @@ class _FreezerPageState extends State<FreezerPage> {
                 Row(
                   children: [
                     Container(
-                      width: deviceWidth * .922,
-                      height: deviceHeight * .663,
-                      margin: EdgeInsets.only(
-                          bottom: deviceHeight * 0, top: deviceHeight * 0),
                       child: Container(
                           margin: EdgeInsets.only(
-                              bottom: deviceHeight * .0,
+                              bottom: deviceHeight * 0,
                               left: deviceWidth * 0.062),
+                          width: deviceWidth * .86,
+                          height: deviceHeight * .707,
                           decoration: BoxDecoration(
                               //color: Color(0xff3f6576),
                               color: Colors.blue[200],
@@ -349,6 +373,14 @@ class _FreezerPageState extends State<FreezerPage> {
                                                         ),
                                                       ])),
                                                   actions: <Widget>[
+                                                    Text(snapshot.data[index]
+                                                                .get(
+                                                                    "ExpDate") ==
+                                                            null
+                                                        ? 'No expiration date'
+                                                        : snapshot.data[index]
+                                                            .get("ExpDate")),
+
                                                     //Submit Button
                                                     InkWell(
                                                       onTap: () {
@@ -363,13 +395,16 @@ class _FreezerPageState extends State<FreezerPage> {
                                                               .05,
                                                           width:
                                                               deviceWidth * .15,
-                                                          decoration: BoxDecoration(
-                                                              color: Colors
-                                                                  .green[300],
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10))),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors
+                                                                .green[300],
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                          ),
                                                           child: Center(
                                                             child: Text(
                                                               "Submit",
@@ -382,6 +417,7 @@ class _FreezerPageState extends State<FreezerPage> {
                                                             ),
                                                           )),
                                                     ),
+
                                                     //Cancel Button
                                                     InkWell(
                                                       onTap: () {
