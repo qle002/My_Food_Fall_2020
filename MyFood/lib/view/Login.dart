@@ -63,7 +63,7 @@ class LoginState extends State<LoginScreen> {
             ),
           ),
           actions: <Widget>[
-            TextButton(
+            FlatButton(
               child: Text(
                 'Understood',
                 style: TextStyle(
@@ -178,7 +178,7 @@ class LoginState extends State<LoginScreen> {
                     width: 130,
                     child: Material(
                       borderRadius: BorderRadius.circular(5),
-                      child: ElevatedButton(
+                      child: RaisedButton(
                         onPressed: () async {
                           await Firebase.initializeApp();
                           try {
@@ -196,10 +196,7 @@ class LoginState extends State<LoginScreen> {
                             }
                           }
                         },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.orange[700], // background
-                          onPrimary: Colors.white, // foreground
-                        ),
+                        color: Colors.orange[700],
                         child: Center(
                           child: Text('Log In',
                               style: TextStyle(
@@ -217,7 +214,7 @@ class LoginState extends State<LoginScreen> {
                   Container(
                     height: 30,
                     width: 155,
-                    child: TextButton(
+                    child: FlatButton(
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -240,7 +237,7 @@ class LoginState extends State<LoginScreen> {
                   Container(
                     height: 30,
                     width: 90,
-                    child: TextButton(
+                    child: FlatButton(
                       onPressed: () {
                         Navigator.push(
                             context,
